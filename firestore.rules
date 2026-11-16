@@ -1,0 +1,166 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Default deny all
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Helper functions
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    function isAdmin() {
+      return isSignedIn() && (
+        request.auth.token.email == 'imdshofiqul863@gmail.com' ||
+        exists(/databases/$(database)/documents/admins/$(request.auth.uid))
+      );
+    }
+
+    // Users Collection
+    match /users/{userId} {
+      allow get: if isSignedIn();
+      allow list: if isAdmin();
+      allow create: if isOwner(userId) && (!('role' in request.resource.data) || request.resource.data.role == 'user');
+      allow update: if (isOwner(userId) && (!request.resource.data.diff(resource.data).affectedKeys().hasAny(['role', 'isBanned']))) || isAdmin();
+      allow delete: if isAdmin();
+
+      // User Viewing Profiles subcollection
+      match /profiles/{profileId} {
+        allow read, write: if isOwner(userId) || isAdmin();
+      }
+    }
+
+    // Admins Collection
+    match /admins/{adminId} {
+      allow read, write: if isAdmin();
+    }
+
+    // Movies Catalog
+    match /movies/{movieId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Series Catalog
+    match /series/{seriesId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Episodes
+    match /episodes/{episodeId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Categories
+    match /categories/{categoryId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Languages
+    match /languages/{languageId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Video Streaming Servers
+    match /videoServers/{serverId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // User Watch History
+    match /watchHistory/{historyId} {
+      allow get, list: if isSignedIn() && resource.data.userId == request.auth.uid;
+      allow create: if isSignedIn() && request.resource.data.userId == request.auth.uid;
+      allow update: if isSignedIn() && resource.data.userId == request.auth.uid && request.resource.data.userId == request.auth.uid;
+      allow delete: if isSignedIn() && resource.data.userId == request.auth.uid;
+    }
+
+    // User Favorites / Watchlist
+    match /favorites/{favoriteId} {
+      allow get, list: if isSignedIn() && resource.data.userId == request.auth.uid;
+      allow create: if isSignedIn() && request.resource.data.userId == request.auth.uid;
+      allow update: if isSignedIn() && resource.data.userId == request.auth.uid && request.resource.data.userId == request.auth.uid;
+      allow delete: if isSignedIn() && resource.data.userId == request.auth.uid;
+    }
+
+    // Content Licenses & Rights
+    match /contentLicenses/{licenseId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Watch Party Rooms
+    match /watchParties/{roomId} {
+      allow read: if isSignedIn();
+      allow create: if isSignedIn() && request.resource.data.hostUid == request.auth.uid;
+      allow update: if isSignedIn() && (
+        resource.data.hostUid == request.auth.uid ||
+        request.resource.data.diff(resource.data).affectedKeys().hasOnly(['participants', 'participantCount'])
+      );
+      allow delete: if isSignedIn() && (resource.data.hostUid == request.auth.uid || isAdmin());
+    }
+
+    // Community Discussions
+    match /discussions/{commentId} {
+      allow read: if true;
+      allow create: if isSignedIn() && request.resource.data.userId == request.auth.uid;
+      allow update: if (isSignedIn() && resource.data.userId == request.auth.uid) ||
+                    (isSignedIn() && request.resource.data.diff(resource.data).affectedKeys().hasAny(['isReported', 'reportCount', 'likesCount'])) ||
+                    isAdmin();
+      allow delete: if (isSignedIn() && resource.data.userId == request.auth.uid) || isAdmin();
+    }
+
+    // Support Tickets
+    match /supportTickets/{ticketId} {
+      allow get, list: if isSignedIn() && (resource.data.userId == request.auth.uid || isAdmin());
+      allow create: if isSignedIn() && request.resource.data.userId == request.auth.uid;
+      allow update: if isSignedIn() && (resource.data.userId == request.auth.uid || isAdmin());
+      allow delete: if isAdmin();
+    }
+
+    // Subscriptions, Coupons & Financial Data
+    match /subscriptionPlans/{planId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /coupons/{couponId} {
+      allow read: if isSignedIn();
+      allow write: if isAdmin();
+    }
+
+    match /paymentTransactions/{txId} {
+      allow get, list: if isSignedIn() && (resource.data.userId == request.auth.uid || isAdmin());
+      allow write: if isAdmin();
+    }
+
+    match /homepageSections/{sectionId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Global Settings
+    match /settings/{settingId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Admin Logs
+    match /adminLogs/{logId} {
+      allow read: if isAdmin();
+      allow create: if isAdmin() || isSignedIn();
+      allow update, delete: if isAdmin();
+    }
+  }
+}

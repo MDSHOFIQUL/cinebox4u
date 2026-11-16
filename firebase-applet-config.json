@@ -1,0 +1,13 @@
+{
+  "projectId": "cinebox4u-478d9",
+  "appId": "1:219783874964:web:4d28160509b04ce0192781",
+  "apiKey": "AIzaSyBdYAJQeQNjLJtLO_MCSs3uYTDZ8wT-vts",
+  "authDomain": "cinebox4u-478d9.firebaseapp.com",
+  "databaseURL": "https://cinebox4u-478d9-default-rtdb.firebaseio.com",
+  "firestoreDatabaseId": "(default)",
+  "storageBucket": "cinebox4u-478d9.firebasestorage.app",
+  "messagingSenderId": "219783874964",
+  "measurementId": "G-X62557HQ5T",
+  "oAuthClientId": "",
+  "recaptchaSiteKey": ""
+}

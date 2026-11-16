@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="bn" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CineBox4u - সুপার-ফাস্ট মুভি ডাউনলোড ও স্ট্রিমিং</title>
+  <meta name="description" content="CineBox4u - সম্পূর্ণ ফ্রি সিনেমা ও সিরিজ ডাউনলোড। 144p, 240p, 360p, 480p, 720p, 1080p এবং 4K কোয়ালিটিতে Google Drive ও MEGA সার্ভারে ডাউনলোড করুন।" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            amber: {
+              400: '#fbbf24',
+              500: '#f59e0b',
+              600: '#d97706',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Fonts & FontAwesome Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@1,900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #07080b;
+      color: #f3f4f6;
+    }
+    .scrollbar-none::-webkit-scrollbar {
+      display: none;
+    }
+    .scrollbar-none {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    .cine-script {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body id="bodyRoot" class="bg-[#07080b] text-[#f3f4f6] selection:bg-amber-500 selection:text-black min-h-screen flex flex-col justify-between">
+
+  <!-- ======================================================== -->
+  <!-- 1. TOP NAVBAR (Cine FREAK style with left hamburger & pink 32 badge) -->
+  <!-- ======================================================== -->
+  <header class="sticky top-0 z-40 bg-[#07080b]/95 backdrop-blur-xl border-b border-zinc-800/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
+      
+      <!-- Left: Hamburger Menu & Logo -->
+      <div class="flex items-center gap-3">
+        <button onclick="toggleMobileMenu()" class="p-1.5 text-zinc-300 hover:text-white transition" aria-label="Menu">
+          <i class="fa-solid fa-bars text-xl"></i>
+        </button>
+
+        <a href="#" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;" class="flex items-baseline relative select-none">
+          <span class="cine-script text-2xl sm:text-3xl font-black text-amber-500 drop-shadow-[0_2px_8px_rgba(245,158,11,0.35)]">
+            Cine
+          </span>
+          <span class="text-2xl sm:text-3xl font-black tracking-wider text-white ml-1">
+            Box
+          </span>
+          <span class="text-xs sm:text-sm font-black text-white bg-gradient-to-r from-red-600 to-amber-600 px-1.5 py-0.5 rounded-md ml-1 shadow-md">
+            4u
+          </span>
+        </a>
+      </div>
+
+      <!-- Right: Notification 32, Search, Device Switcher, Zoom Scale -->
+      <div class="flex items-center gap-2 sm:gap-3">
+        <!-- Notification Bell with Pink 32 Badge -->
+        <button onclick="alert('CineBox4u নোটিশ: সকল মুভি ১০০% ফ্রি এবং সুপার-ফাস্ট সার্ভারে উপলব্ধ!')" class="relative p-2 text-zinc-300 hover:text-amber-400 transition" title="আপডেট ও নোটিশ">
+          <i class="fa-regular fa-bell text-lg"></i>
+          <span class="absolute -top-1 -right-1 bg-[#e11d48] text-white text-[10px] font-black rounded-full px-1.5 py-0.2 min-w-5 h-4 flex items-center justify-center shadow-lg border border-pink-400/30">
+            32
+          </span>
+        </button>
+
+        <!-- Search Icon -->
+        <button onclick="focusSearchModal()" class="p-2 text-zinc-300 hover:text-white transition" title="সার্চ করুন">
+          <i class="fa-solid fa-magnifying-glass text-lg"></i>
+        </button>
+
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ======================================================== -->
+  <!-- 2. MAIN CONTAINER -->
+  <!-- ======================================================== -->
+  <main class="max-w-7xl mx-auto px-3 sm:px-6 py-6 space-y-6 flex-1 w-full">
+
+    <!-- 1. FEATURED HERO CARD (Toxic 2026 with Amber Glowing Border) -->
+    <section class="relative">
+      <div onclick="openDownloadModal('mov-toxic')" class="relative w-full rounded-3xl border-2 border-amber-500/80 shadow-[0_0_30px_rgba(245,158,11,0.25)] overflow-hidden bg-zinc-950 aspect-[16/10] sm:aspect-[21/9] max-h-[460px] cursor-pointer group transition-all duration-300 hover:border-amber-400 hover:shadow-[0_0_40px_rgba(245,158,11,0.4)]">
+        
+        <!-- Background Image -->
+        <img
+          src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=1600&auto=format&fit=crop&q=80"
+          alt="Toxic (2026)"
+          class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 brightness-90 contrast-110"
+        />
+
+        <!-- Contrast overlays -->
+        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-black/25"></div>
+        <div class="absolute inset-0 bg-gradient-to-r from-black/80 via-black/20 to-transparent"></div>
+
+        <!-- Stylized TOXIC title artwork -->
+        <div class="absolute left-5 sm:left-10 top-1/3 -translate-y-1/2 pointer-events-none select-none max-w-[280px] sm:max-w-md">
+          <h1 class="text-3xl sm:text-5xl md:text-6xl font-black tracking-widest text-zinc-300 font-serif opacity-80 drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)] uppercase">
+            TOXIC
+          </h1>
+          <p class="text-[10px] sm:text-xs tracking-[0.25em] text-zinc-400 font-bold uppercase mt-0.5">
+            A Fairy Tale for Grown-ups
+          </p>
+        </div>
+
+        <!-- Top-Right Badges -->
+        <div class="absolute top-4 right-4 flex items-center gap-2 pointer-events-none z-10">
+          <span class="px-3 py-1 rounded-full bg-black/70 backdrop-blur-md text-amber-300 text-[10px] sm:text-xs font-black uppercase tracking-wider border border-zinc-700/60 shadow-lg">
+            FEATURED
+          </span>
+          <span class="px-3 py-1 rounded-full bg-black/70 backdrop-blur-md text-zinc-100 text-[10px] sm:text-xs font-semibold border border-zinc-700/60 shadow-lg">
+            Hindi Dubbed Movies
+          </span>
+        </div>
+
+        <!-- Bottom-Left Details & Watch Now Button -->
+        <div class="absolute bottom-4 left-4 sm:bottom-6 sm:left-6 z-10 space-y-2.5">
+          <div>
+            <h2 class="text-xl sm:text-3xl font-extrabold text-white tracking-tight drop-shadow-md">
+              Toxic (2026)
+            </h2>
+            <div class="flex items-center gap-2 text-zinc-300 text-xs sm:text-sm font-medium mt-1">
+              <span class="flex items-center gap-1.5 text-zinc-200">
+                <i class="fa-regular fa-calendar text-amber-400 text-xs"></i>
+                <span>Oct 2026</span>
+              </span>
+              <span>•</span>
+              <span class="text-amber-400 font-bold">4K UHD</span>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-3 pt-1">
+            <button class="px-4 sm:px-6 py-2 rounded-xl bg-zinc-950/85 hover:bg-amber-500 text-white hover:text-black border border-amber-500/70 hover:border-amber-400 font-black text-xs sm:text-sm flex items-center gap-2 transition duration-200 shadow-xl cursor-pointer">
+              <i class="fa-solid fa-play text-amber-400 text-xs"></i>
+              <span>Watch Now</span>
+            </button>
+
+            <button class="px-3 sm:px-4 py-2 rounded-xl bg-red-600 hover:bg-red-500 text-white font-bold text-xs flex items-center gap-1.5 shadow-lg">
+              <i class="fa-solid fa-download text-xs"></i>
+              <span>ডাউনলোড (7 Quality)</span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- 2. NEW MOVIES SECTION (নতুন মুভি) -->
+    <section class="space-y-4 pt-1">
+      <div class="flex items-center justify-between border-b border-zinc-800/60 pb-3">
+        <div class="flex items-center gap-2">
+          <div class="w-7 h-7 rounded-lg bg-amber-500/20 border border-amber-500/30 flex items-center justify-center text-amber-400">
+            <i class="fa-solid fa-wand-magic-sparkles text-sm"></i>
+          </div>
+          <div>
+            <h2 class="text-lg sm:text-xl font-bold text-white tracking-tight flex items-center gap-2">
+              <span>New Movies</span>
+              <span class="text-xs sm:text-sm font-semibold text-amber-400">(নতুন মুভি)</span>
+            </h2>
+            <p class="text-[11px] text-zinc-400">সদ্য যুক্ত হওয়া নতুন সিনেমা সমূহ</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2-column mobile grid for new movies -->
+      <div id="newMoviesGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-5">
+        <!-- Rendered by JavaScript -->
+      </div>
+    </section>
+
+    <!-- 3. LATEST RELEASES SECTION (Exact screenshot match: 2-column mobile cards) -->
+    <section class="space-y-4 pt-1">
+      <div class="flex items-center justify-between border-b border-zinc-800/60 pb-3">
+        <div class="flex items-center gap-2">
+          <div class="w-7 h-7 rounded-lg bg-red-600/20 border border-red-500/30 flex items-center justify-center text-red-500">
+            <i class="fa-solid fa-fire text-sm"></i>
+          </div>
+          <div>
+            <h2 class="text-lg sm:text-xl font-bold text-white tracking-tight flex items-center gap-2">
+              <span>Latest Releases</span>
+              <span class="text-xs sm:text-sm font-semibold text-zinc-400">(লেটেস্ট রিলিজ)</span>
+            </h2>
+            <p class="text-[11px] text-zinc-400">সকল মুভি ও রিলিজ কালেকশন</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2-column grid on mobile (responsive up to 5 on large screens) -->
+      <div id="moviesGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-5">
+        <!-- Rendered by JavaScript -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ======================================================== -->
+  <!-- 3. FLOATING TELEGRAM SHARE BUTTON -->
+  <!-- ======================================================== -->
+  <button
+    type="button"
+    onclick="window.open('https://t.me/share/url?url=' + encodeURIComponent(window.location.href) + '&text=' + encodeURIComponent('CineBox4u'), '_blank')"
+    class="fixed bottom-6 left-4 sm:left-6 z-40 w-12 h-12 rounded-full bg-white hover:bg-zinc-100 shadow-2xl flex items-center justify-center transition-transform hover:scale-110 active:scale-95 border border-zinc-200 cursor-pointer"
+    title="Share on Telegram"
+    aria-label="Telegram"
+  >
+    <svg class="w-6 h-6 text-[#229ED9] fill-current" viewBox="0 0 24 24">
+      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.75-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z" />
+    </svg>
+  </button>
+
+  <!-- ======================================================== -->
+  <!-- 4. DOWNLOAD MODAL (7 Quality Presets + 2 Servers GDrive & MEGA) -->
+  <!-- ======================================================== -->
+  <div id="downloadModal" class="hidden fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-3 sm:p-6 overflow-y-auto">
+    <div class="relative w-full max-w-2xl bg-[#0e1017] border border-zinc-700/80 rounded-3xl shadow-2xl overflow-hidden my-auto animate-fadeIn text-zinc-200">
+      
+      <!-- Modal Header -->
+      <div class="relative p-5 border-b border-zinc-800 flex items-center justify-between bg-zinc-950/60">
+        <div>
+          <span class="text-[10px] font-black uppercase tracking-wider text-amber-400 bg-amber-400/10 px-2 py-0.5 rounded border border-amber-400/20">
+            ১০০% ফ্রি ডাউনলোড
+          </span>
+          <h3 id="modalTitle" class="text-lg sm:text-xl font-black text-white mt-1 line-clamp-1">
+            মুভির নাম
+          </h3>
+        </div>
+        <button onclick="closeDownloadModal()" class="w-8 h-8 rounded-full bg-zinc-800 hover:bg-zinc-700 text-zinc-300 hover:text-white flex items-center justify-center transition cursor-pointer">
+          <i class="fa-solid fa-xmark text-sm"></i>
+        </button>
+      </div>
+
+      <!-- 7 Quality Buttons Section with 2 Servers (Google Drive & MEGA) -->
+      <div class="p-5 space-y-4 max-h-[75vh] overflow-y-auto">
+        
+        <div class="flex items-center justify-between text-xs text-zinc-400 border-b border-zinc-800 pb-2">
+          <span class="font-bold text-zinc-200 flex items-center gap-1.5">
+            <i class="fa-solid fa-layer-group text-amber-400"></i>
+            ৭টি রেজ্যুলেশন কোয়ালিটি ও ২টি সার্ভার
+          </span>
+          <span class="text-[11px] text-emerald-400 font-bold">
+            <i class="fa-solid fa-circle-check"></i> সম্পূর্ণ ফ্রি
+          </span>
+        </div>
+
+        <div id="qualityOptionsContainer" class="space-y-2.5">
+          <!-- 7 quality options inserted dynamically -->
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- 5. JAVASCRIPT DATA & LOGIC -->
+  <!-- ======================================================== -->
+  <script>
+    // Movies database matching screenshot
+    const MOVIES = [
+      {
+        id: 'mov-ramayana',
+        title: 'Ramayana: Rise of a Legend',
+        year: 2026,
+        quality: 'HDTC',
+        platform: 'sonyliv',
+        accentColor: 'emerald',
+        poster: 'https://images.unsplash.com/photo-1542204165-65bf26472b9b?w=800&auto=format&fit=crop&q=80',
+        badge: 'HDTC',
+        lang: 'Hindi & Tamil [Dual Audio]',
+        audio: 'Hindi TrueHD 7.1 Atmos',
+        gdrive: 'https://drive.google.com/uc?export=download&id=1exampleGdriveRamayana',
+        mega: 'https://mega.nz/file/ramayana_cinefreak'
+      },
+      {
+        id: 'mov-bagheera',
+        title: 'Bagheera (Bhatitha)',
+        year: 2024,
+        quality: 'WEB-DL',
+        platform: 'zee5',
+        accentColor: 'red',
+        poster: 'https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=800&auto=format&fit=crop&q=80',
+        badge: 'WEB-DL',
+        lang: 'Hindi & Tamil [Dual Audio]',
+        audio: 'Hindi 5.1 Dolby Audio',
+        gdrive: 'https://drive.google.com/uc?export=download&id=1exampleGdriveBagheera',
+        mega: 'https://mega.nz/file/bagheera_cinefreak'
+      },
+      {
+        id: 'mov-toxic',
+        title: 'Toxic (2026)',
+        year: 2026,
+        quality: '4K UHD',
+        platform: 'hotstar',
+        accentColor: 'emerald',
+        poster: 'https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=800&auto=format&fit=crop&q=80',
+        badge: '4K UHD',
+        lang: 'Hindi & Kannada [Dual Audio]',
+        audio: 'Dolby Atmos 7.1',
+        gdrive: 'https://drive.google.com/uc?export=download&id=1exampleGdriveToxic',
+        mega: 'https://mega.nz/file/toxic_2026_cinefreak'
+      },
+      {
+        id: 'mov-toofan',
+        title: 'তুফান (Toofan)',
+        year: 2024,
+        quality: '4K UHD',
+        platform: 'hoichoi',
+        accentColor: 'emerald',
+        poster: 'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=800&auto=format&fit=crop&q=80',
+        badge: '4K UHD',
+        lang: 'বাংলা [Original]',
+        audio: 'Bangla Master 5.1 DDP',
+        gdrive: 'https://drive.google.com/uc?export=download&id=1exampleGdriveToofan',
+        mega: 'https://mega.nz/file/toofan_bangla'
+      },
+      {
+        id: 'mov-sigma',
+        title: 'Sigma: Chapter 1',
+        year: 2026,
+        quality: 'WEB-DL',
+        platform: 'netflix',
+        accentColor: 'emerald',
+        poster: 'https://images.unsplash.com/photo-1578632767115-351597cf2477?w=800&auto=format&fit=crop&q=80',
+        badge: 'WEB-DL',
+        lang: 'Hindi & Tamil',
+        audio: 'Hindi 5.1 DDP',
+        gdrive: 'https://drive.google.com/file/d/1CineBox4u_Sigma_2026/view',
+        mega: 'https://mega.nz/file/sigma_2026'
+      },
+      {
+        id: 'mov-pushpa2',
+        title: 'Pushpa 2: The Rule',
+        year: 2024,
+        quality: '4K UHD',
+        platform: 'prime',
+        accentColor: 'red',
+        poster: 'https://images.unsplash.com/photo-1534447677768-be436bb09401?w=800&auto=format&fit=crop&q=80',
+        badge: '4K UHD',
+        lang: 'Hindi & Telugu [Dual Audio]',
+        audio: 'Dolby Atmos 5.1',
+        gdrive: 'https://drive.google.com/file/d/1pushpa2/view',
+        mega: 'https://mega.nz/file/pushpa2'
+      },
+      {
+        id: 'mov-surongo',
+        title: 'সুড়ঙ্গ (Surongo)',
+        year: 2023,
+        quality: 'WEB-DL',
+        platform: 'chorki',
+        accentColor: 'emerald',
+        poster: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=800&auto=format&fit=crop&q=80',
+        badge: 'WEB-DL',
+        lang: 'বাংলা [Original]',
+        audio: 'Bangla 5.1 DDP',
+        gdrive: 'https://drive.google.com/file/d/1surongo/view',
+        mega: 'https://mega.nz/file/surongo'
+      }
+    ];
+
+    const QUALITIES = [
+      { quality: '144p', res: '256 x 144', size: '120 MB', color: 'zinc' },
+      { quality: '240p', res: '426 x 240', size: '210 MB', color: 'zinc' },
+      { quality: '360p', res: '640 x 360', size: '350 MB', color: 'zinc' },
+      { quality: '480p', res: '854 x 480', size: '550 MB', color: 'red' },
+      { quality: '720p', res: '1280 x 720', size: '1.2 GB', color: 'amber' },
+      { quality: '1080p', res: '1920 x 1080', size: '2.5 GB', color: 'blue' },
+      { quality: '4K', res: '3840 x 2160', size: '6.8 GB', color: 'purple' },
+    ];
+
+    function renderMovies() {
+      const newGrid = document.getElementById('newMoviesGrid');
+      const allGrid = document.getElementById('moviesGrid');
+
+      const cardHtml = (movie) => `
+        <div onclick="openDownloadModal('${movie.id}')" class="group relative flex flex-col bg-zinc-900/60 rounded-2xl overflow-hidden border border-zinc-800/80 hover:border-amber-500/80 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 cursor-pointer">
+          <!-- Poster container -->
+          <div class="relative aspect-[2/3] w-full overflow-hidden bg-zinc-950">
+            <img src="${movie.poster}" alt="${movie.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+
+            <!-- Top Badges (TRENDING + Quality) -->
+            <div class="absolute top-2 inset-x-2 flex items-center justify-between pointer-events-none z-10">
+              <div class="flex items-center bg-black/90 backdrop-blur-md rounded-md overflow-hidden shadow-lg border border-zinc-800">
+                <span class="w-1 h-3.5 ${movie.accentColor === 'red' ? 'bg-red-500' : 'bg-emerald-400'}"></span>
+                <span class="px-1.5 py-0.5 text-[9px] font-black uppercase tracking-wider text-white">TRENDING</span>
+              </div>
+              <span class="px-2 py-0.5 rounded-md text-[10px] font-black uppercase tracking-wider bg-black/85 backdrop-blur-md text-zinc-100 border border-zinc-700/60 shadow-md">
+                ${movie.badge}
+              </span>
+            </div>
+
+            <!-- Hover Download overlay -->
+            <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
+              <div class="w-11 h-11 rounded-full bg-amber-500 text-black flex items-center justify-center shadow-lg">
+                <i class="fa-solid fa-download text-sm"></i>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom details -->
+          <div class="p-3 flex-1 flex flex-col justify-between">
+            <h3 class="text-xs sm:text-sm font-bold text-white group-hover:text-amber-400 transition-colors line-clamp-1">
+              ${movie.title}
+            </h3>
+            <div class="text-[11px] text-zinc-400 mt-1 flex items-center justify-between">
+              <span>${movie.year}</span>
+              <span class="text-amber-400 font-semibold flex items-center gap-1">
+                <i class="fa-solid fa-download text-[10px]"></i> ডাউনলোড
+              </span>
+            </div>
+          </div>
+        </div>
+      `;
+
+      if (newGrid) {
+        newGrid.innerHTML = MOVIES.slice(0, 4).map(cardHtml).join('');
+      }
+      if (allGrid) {
+        allGrid.innerHTML = MOVIES.map(cardHtml).join('');
+      }
+    }
+
+    function openDownloadModal(movieId) {
+      const movie = MOVIES.find(m => m.id === movieId) || MOVIES[0];
+      document.getElementById('modalTitle').textContent = movie.title;
+
+      const container = document.getElementById('qualityOptionsContainer');
+      container.innerHTML = QUALITIES.map(q => `
+        <div class="p-3 rounded-2xl bg-zinc-900/90 border border-zinc-800 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 hover:border-amber-500/50 transition">
+          <div class="flex items-center gap-2">
+            <span class="px-2.5 py-1 rounded-lg bg-red-600/20 text-red-400 border border-red-500/30 text-xs font-black uppercase">
+              ${q.quality}
+            </span>
+            <span class="text-xs text-zinc-300 font-mono">${q.res}</span>
+            <span class="text-xs text-emerald-400 font-bold bg-emerald-950/40 px-2 py-0.5 rounded border border-emerald-500/30">
+              ${q.size}
+            </span>
+          </div>
+
+          <!-- 2 Servers: Google Drive & MEGA -->
+          <div class="flex items-center gap-2 w-full sm:w-auto">
+            <a href="${movie.gdrive}" target="_blank" class="flex-1 sm:flex-initial px-3 py-1.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs flex items-center justify-center gap-1.5 shadow transition">
+              <i class="fa-brands fa-google-drive"></i>
+              <span>Google Drive</span>
+            </a>
+            <a href="${movie.mega}" target="_blank" class="flex-1 sm:flex-initial px-3 py-1.5 rounded-xl bg-red-600 hover:bg-red-500 text-white font-bold text-xs flex items-center justify-center gap-1.5 shadow transition">
+              <i class="fa-solid fa-cloud-arrow-down"></i>
+              <span>MEGA</span>
+            </a>
+          </div>
+        </div>
+      `).join('');
+
+      document.getElementById('downloadModal').classList.remove('hidden');
+    }
+
+    function closeDownloadModal() {
+      document.getElementById('downloadModal').classList.add('hidden');
+    }
+
+    function toggleMobileMenu() {
+      alert('মেনু: ১. হোম, ২. New Movies, ৩. Latest Releases, ৪. টেলিগ্রাম চ্যানেল। সকল ডাউনলোড ১০০% ফ্রি!');
+    }
+
+    // Initial render
+    renderMovies();
+  </script>
+</body>
+</html>

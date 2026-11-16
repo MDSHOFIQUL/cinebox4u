@@ -1,0 +1,6 @@
+{
+  "name": "CineBox4u",
+  "description": "CineBox4u - Ultimate Super-Fast Movie Download Portal. Download English, Bangla, and Hindi movies in 1080p, 720p, 480p, and 360p with MEGA, Google Drive, and direct MP4 support.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

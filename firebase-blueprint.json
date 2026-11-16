@@ -1,0 +1,354 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile and account information",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "maxLength": 128 },
+        "email": { "type": "string", "format": "email", "maxLength": 255 },
+        "displayName": { "type": "string", "maxLength": 100 },
+        "photoURL": { "type": "string", "maxLength": 1000 },
+        "role": { "type": "string", "enum": ["user", "admin", "superadmin", "editor"] },
+        "isBanned": { "type": "boolean" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "lastLoginAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "email", "createdAt"]
+    },
+    "ViewingProfile": {
+      "title": "ViewingProfile",
+      "description": "Sub-profile under a user account",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "userId": { "type": "string", "maxLength": 128 },
+        "name": { "type": "string", "maxLength": 50 },
+        "avatarUrl": { "type": "string", "maxLength": 1000 },
+        "isKids": { "type": "boolean" },
+        "pin": { "type": "string", "maxLength": 10 },
+        "language": { "type": "string", "maxLength": 10 },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "userId", "name"]
+    },
+    "Admin": {
+      "title": "Admin",
+      "description": "Admin authorization entry",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "maxLength": 128 },
+        "email": { "type": "string", "format": "email", "maxLength": 255 },
+        "role": { "type": "string", "enum": ["admin", "superadmin", "editor"] },
+        "grantedAt": { "type": "string", "format": "date-time" },
+        "grantedBy": { "type": "string", "maxLength": 128 }
+      },
+      "required": ["uid", "email", "role", "grantedAt"]
+    },
+    "Movie": {
+      "title": "Movie",
+      "description": "Movie catalog item",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "title": { "type": "string", "maxLength": 255 },
+        "posterUrl": { "type": "string", "maxLength": 2048 },
+        "backdropUrl": { "type": "string", "maxLength": 2048 },
+        "description": { "type": "string", "maxLength": 5000 },
+        "duration": { "type": "string", "maxLength": 50 },
+        "releaseYear": { "type": "number" },
+        "language": { "type": "string", "maxLength": 50 },
+        "category": { "type": "string", "maxLength": 50 },
+        "genres": { "type": "array" },
+        "rating": { "type": "number" },
+        "videoQuality": { "type": "string", "maxLength": 20 },
+        "isPublished": { "type": "boolean" },
+        "isFeatured": { "type": "boolean" },
+        "viewsCount": { "type": "number" },
+        "approvalStatus": { "type": "string", "enum": ["draft", "pending", "approved", "rejected"] },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["title", "releaseYear", "language", "category"]
+    },
+    "Series": {
+      "title": "Series",
+      "description": "TV Series or Web Series item",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "title": { "type": "string", "maxLength": 255 },
+        "posterUrl": { "type": "string", "maxLength": 2048 },
+        "backdropUrl": { "type": "string", "maxLength": 2048 },
+        "description": { "type": "string", "maxLength": 5000 },
+        "releaseYear": { "type": "number" },
+        "language": { "type": "string", "maxLength": 50 },
+        "category": { "type": "string", "maxLength": 50 },
+        "genres": { "type": "array" },
+        "rating": { "type": "number" },
+        "seasonsCount": { "type": "number" },
+        "totalEpisodes": { "type": "number" },
+        "isPublished": { "type": "boolean" },
+        "isFeatured": { "type": "boolean" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["title", "releaseYear", "language", "category"]
+    },
+    "Episode": {
+      "title": "Episode",
+      "description": "Episode of a series",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "seriesId": { "type": "string", "maxLength": 128 },
+        "seasonNumber": { "type": "number" },
+        "episodeNumber": { "type": "number" },
+        "title": { "type": "string", "maxLength": 255 },
+        "description": { "type": "string", "maxLength": 2000 },
+        "duration": { "type": "string", "maxLength": 50 },
+        "thumbnail": { "type": "string", "maxLength": 2048 },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["seriesId", "seasonNumber", "episodeNumber", "title"]
+    },
+    "Category": {
+      "title": "Category",
+      "description": "Content category",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "name": { "type": "string", "maxLength": 100 },
+        "slug": { "type": "string", "maxLength": 100 },
+        "description": { "type": "string", "maxLength": 500 },
+        "displayOrder": { "type": "number" }
+      },
+      "required": ["name", "slug"]
+    },
+    "Language": {
+      "title": "Language",
+      "description": "Language definition",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "name": { "type": "string", "maxLength": 100 },
+        "code": { "type": "string", "maxLength": 10 },
+        "isPopular": { "type": "boolean" }
+      },
+      "required": ["name", "code"]
+    },
+    "VideoServer": {
+      "title": "VideoServer",
+      "description": "Streaming source server configuration",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "mediaId": { "type": "string", "maxLength": 128 },
+        "mediaType": { "type": "string", "enum": ["movie", "episode"] },
+        "serverName": { "type": "string", "maxLength": 100 },
+        "serverType": { "type": "string", "enum": ["mega", "gdrive", "direct", "hls", "dash"] },
+        "streamUrl": { "type": "string", "maxLength": 2048 },
+        "quality": { "type": "string", "maxLength": 50 },
+        "status": { "type": "string", "enum": ["active", "broken", "testing", "degraded"] },
+        "priority": { "type": "number" }
+      },
+      "required": ["mediaId", "mediaType", "serverName", "serverType", "streamUrl"]
+    },
+    "WatchHistory": {
+      "title": "WatchHistory",
+      "description": "User progress and watch history",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "userId": { "type": "string", "maxLength": 128 },
+        "mediaId": { "type": "string", "maxLength": 128 },
+        "mediaType": { "type": "string", "enum": ["movie", "episode"] },
+        "title": { "type": "string", "maxLength": 255 },
+        "posterUrl": { "type": "string", "maxLength": 2048 },
+        "progressSeconds": { "type": "number" },
+        "totalSeconds": { "type": "number" },
+        "completed": { "type": "boolean" },
+        "lastWatchedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "mediaId", "progressSeconds"]
+    },
+    "Favorite": {
+      "title": "Favorite",
+      "description": "User favorite movies or series",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "userId": { "type": "string", "maxLength": 128 },
+        "mediaId": { "type": "string", "maxLength": 128 },
+        "mediaType": { "type": "string", "enum": ["movie", "series"] },
+        "title": { "type": "string", "maxLength": 255 },
+        "posterUrl": { "type": "string", "maxLength": 2048 },
+        "rating": { "type": "number" },
+        "addedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "mediaId", "mediaType", "title"]
+    },
+    "ContentLicense": {
+      "title": "ContentLicense",
+      "description": "Content streaming rights and expiration policy",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "mediaId": { "type": "string", "maxLength": 128 },
+        "contentOwner": { "type": "string", "maxLength": 100 },
+        "licenseReference": { "type": "string", "maxLength": 100 },
+        "startDate": { "type": "string", "format": "date-time" },
+        "expirationDate": { "type": "string", "format": "date-time" },
+        "status": { "type": "string", "enum": ["active", "expiring_soon", "expired"] }
+      },
+      "required": ["id", "mediaId", "contentOwner", "expirationDate"]
+    },
+    "WatchParty": {
+      "title": "WatchParty",
+      "description": "Real-time synchronized watch room state",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "roomCode": { "type": "string", "maxLength": 30 },
+        "hostUid": { "type": "string", "maxLength": 128 },
+        "mediaId": { "type": "string", "maxLength": 128 },
+        "currentTime": { "type": "number" },
+        "isPlaying": { "type": "boolean" },
+        "lastUpdated": { "type": "string", "format": "date-time" },
+        "expiresAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "roomCode", "hostUid", "mediaId"]
+    },
+    "Discussion": {
+      "title": "Discussion",
+      "description": "Community comment and review thread",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "mediaId": { "type": "string", "maxLength": 128 },
+        "userId": { "type": "string", "maxLength": 128 },
+        "userName": { "type": "string", "maxLength": 100 },
+        "comment": { "type": "string", "maxLength": 1000 },
+        "timestamp": { "type": "string", "format": "date-time" },
+        "likesCount": { "type": "number" },
+        "isReported": { "type": "boolean" },
+        "isModerated": { "type": "boolean" }
+      },
+      "required": ["id", "mediaId", "userId", "comment"]
+    },
+    "SupportTicket": {
+      "title": "SupportTicket",
+      "description": "Customer support desk ticket",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "userId": { "type": "string", "maxLength": 128 },
+        "userEmail": { "type": "string", "maxLength": 255 },
+        "subject": { "type": "string", "maxLength": 255 },
+        "status": { "type": "string", "enum": ["open", "in_progress", "resolved", "closed"] },
+        "priority": { "type": "string", "enum": ["low", "medium", "high"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "userId", "userEmail", "subject"]
+    },
+    "Settings": {
+      "title": "Settings",
+      "description": "Global website configuration and announcements",
+      "type": "object",
+      "properties": {
+        "siteName": { "type": "string", "maxLength": 100 },
+        "description": { "type": "string", "maxLength": 1000 },
+        "logoUrl": { "type": "string", "maxLength": 2048 },
+        "maintenanceMode": { "type": "boolean" },
+        "announcement": { "type": "string", "maxLength": 1000 },
+        "contactEmail": { "type": "string", "maxLength": 255 },
+        "contactTelegram": { "type": "string", "maxLength": 255 }
+      }
+    },
+    "AdminLog": {
+      "title": "AdminLog",
+      "description": "Admin activity history and audit log",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "adminUid": { "type": "string", "maxLength": 128 },
+        "adminEmail": { "type": "string", "maxLength": 255 },
+        "action": { "type": "string", "maxLength": 100 },
+        "targetType": { "type": "string", "maxLength": 50 },
+        "targetId": { "type": "string", "maxLength": 128 },
+        "details": { "type": "string", "maxLength": 2000 },
+        "timestamp": { "type": "string", "format": "date-time" }
+      },
+      "required": ["adminUid", "adminEmail", "action"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profiles and credentials"
+    },
+    "/users/{userId}/profiles/{profileId}": {
+      "schema": "ViewingProfile",
+      "description": "Isolated sub-profiles per user account"
+    },
+    "/admins/{adminId}": {
+      "schema": "Admin",
+      "description": "Authorized administrators"
+    },
+    "/movies/{movieId}": {
+      "schema": "Movie",
+      "description": "Movie catalog items"
+    },
+    "/series/{seriesId}": {
+      "schema": "Series",
+      "description": "Web series and TV drama catalog items"
+    },
+    "/episodes/{episodeId}": {
+      "schema": "Episode",
+      "description": "Episodes of series"
+    },
+    "/categories/{categoryId}": {
+      "schema": "Category",
+      "description": "Content categories and genres"
+    },
+    "/languages/{languageId}": {
+      "schema": "Language",
+      "description": "Supported audio and display languages"
+    },
+    "/videoServers/{serverId}": {
+      "schema": "VideoServer",
+      "description": "Video streaming source servers"
+    },
+    "/watchHistory/{historyId}": {
+      "schema": "WatchHistory",
+      "description": "User watch progress and resume points"
+    },
+    "/favorites/{favoriteId}": {
+      "schema": "Favorite",
+      "description": "User favorite items and watchlist"
+    },
+    "/contentLicenses/{licenseId}": {
+      "schema": "ContentLicense",
+      "description": "Content rights, expiration, and geographic policies"
+    },
+    "/watchParties/{roomId}": {
+      "schema": "WatchParty",
+      "description": "Synchronized watch room playback states"
+    },
+    "/discussions/{commentId}": {
+      "schema": "Discussion",
+      "description": "Community user comments and reviews"
+    },
+    "/supportTickets/{ticketId}": {
+      "schema": "SupportTicket",
+      "description": "Customer support requests and history"
+    },
+    "/settings/{settingId}": {
+      "schema": "Settings",
+      "description": "Website global settings"
+    },
+    "/adminLogs/{logId}": {
+      "schema": "AdminLog",
+      "description": "Audit trails for administrator operations"
+    }
+  }
+}
